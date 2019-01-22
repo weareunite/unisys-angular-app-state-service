@@ -1,0 +1,23 @@
+{
+  "name": "unisys-angular-app-state-service",
+  "version": "0.0.1",
+  "author": "UNITE s.r.o.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weareunite/unisys-angular-app-state-service.git"
+  },
+  "keywords": [
+    "unite",
+    "unisys",
+    "angular",
+    "angularjs",
+    "framework",
+    "typescript",
+    "javascript"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0"
+  }
+}
