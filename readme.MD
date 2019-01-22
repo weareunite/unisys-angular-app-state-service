@@ -1,12 +1,5 @@
-# UniSys Angular View Button
+# UniSys Angular App State Service
 #### Installation
 Install library by running command
-> npm i @weareunite/unisys-angular-view-button
-#### Inputs
-Name | Type | Description
---- | --- | ---
-`actionList` | *any[]* | List of actions
-`context` | *any* | TBA
-#### Component selector
-> lib-unisys-angular-view-button
+> npm i @weareunite/unisys-angular-app-state-service
 
