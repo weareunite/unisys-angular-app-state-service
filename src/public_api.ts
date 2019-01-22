@@ -3,4 +3,3 @@
  */
 
 export * from './lib/unisys-angular-app-state-service.service';
-export * from './lib/unisys-angular-app-state-service.module';
