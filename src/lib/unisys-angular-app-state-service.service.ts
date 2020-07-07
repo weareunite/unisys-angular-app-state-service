@@ -10,6 +10,7 @@ export class UnisysAngularAppStateServiceService {
 
   public state = '';
   public viewState = {};
+  public appState = {};
   public requestList = {
     GET: [],
     POST: [],
@@ -21,6 +22,7 @@ export class UnisysAngularAppStateServiceService {
   requestListChanged = new Subject();
   requestListSubscription = new Subscription();
   viewStateChanged = new Subject();
+  appStateChanged = new Subject();
 
   constructor(
     protected router : Router,
@@ -74,6 +76,43 @@ export class UnisysAngularAppStateServiceService {
     this.updateRequestList(this.requestList);
   }
 
+// GLOBAL STATE
+
+  setAppState(state: any, componentName: string) {
+    if(!this.appState){this.appState = {}};
+
+    if(componentName){
+      this.appState[componentName] = state;
+    }else{
+      this.appState = state;
+    }
+
+    localStorage.setItem('appState', JSON.stringify(this.appState));
+    this.appStateChanged.next(this.appState);
+  }
+
+  getAppState(componentName?:string){
+    if(!Object.keys(this.appState).length && localStorage.getItem('appState')){
+      this.appState = JSON.parse(localStorage.getItem('appState'));
+    }
+
+    if(this.appState && !componentName){
+      return this.appState;
+    }else {
+      if(this.appState && this.appState[componentName]){
+        return this.appState[componentName];
+      }
+    }
+    return false;
+  }
+
+  setAppComponentStateOrSetDefault(defaultSettings,componentName:string){
+    if(!this.getAppState(componentName)){
+      this.setAppState(defaultSettings,componentName);
+    }
+    this.appStateChanged.next(this.appState);
+  }
+
 // VIEW STATE
 
   setViewStateValue(value: any, key:string) {
@@ -91,7 +130,7 @@ export class UnisysAngularAppStateServiceService {
     this.setViewState(this.viewState[this.router.url]);
   }
 
-  setViewState(state: any[], componentName?: string) {
+  setViewState(state: any, componentName?: string) {
     if(!this.viewState[this.router.url]){this.viewState[this.router.url] = {}};
 
     if(componentName){
